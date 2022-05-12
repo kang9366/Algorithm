@@ -7,6 +7,7 @@ public class Main {
         float[] arr = new float[N];
         float max = 0;
         float sum = 0;
+        
         for (int i = 0; i < N; i++){
             arr[i] = sc.nextFloat();
             if(arr[i] > max) max = arr[i];
