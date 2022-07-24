@@ -16,6 +16,7 @@ fun main(){
         var temp: Int = readLine()!!.toInt()
         list2.add(temp)
     }
+    
 
     for(i in 0 until num){
         println(list[list2[i]])
