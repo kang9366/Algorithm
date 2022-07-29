@@ -45,3 +45,4 @@ int main(){
     sort(result.begin(), result.end());
     cout << result[0] << endl;
 }
+
