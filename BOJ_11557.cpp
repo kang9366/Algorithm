@@ -19,3 +19,5 @@ int main(){
         cout << S[max_element(L, L+temp) - L] << "\n";
     }
 }
+
+
