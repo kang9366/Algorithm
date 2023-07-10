@@ -15,10 +15,8 @@ int main(){
 
     for(int i=0; i<size(vec); i++){
         temp = change / vec[i];
-        cout << temp << endl;
         result += temp;
         change = change - temp*vec[i];
     }
-
     cout << result;
 }
