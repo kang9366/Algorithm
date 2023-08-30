@@ -1,4 +1,5 @@
 #include <iostream>
+#define MOD 10007
 
 using namespace std;
 
@@ -21,12 +22,12 @@ int main(){
             for(int k=0; k<=j; k++){
                 dp[i][j] += dp[i-1][k];
             }
-            dp[i][j] %= 10007;
+            dp[i][j] %= MOD;
         }
     }
 
     for(int i=0; i<10; i++){
         result += dp[N][i];
     }
-    cout << result%10007;
+    cout << result%MOD;
 }
