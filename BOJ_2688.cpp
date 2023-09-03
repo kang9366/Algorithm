@@ -1,4 +1,5 @@
 #include <iostream>
+#define endl "\n"
 
 using namespace std;
 
@@ -27,12 +28,16 @@ long long solve(int N){
 }
 
 int main(){
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    
     int N, T;
     cin >> T;
 
 
     for(int i=0; i<T; i++){
         cin >> N;
-        cout << solve(N);
+        cout << solve(N) << endl;
     }
 }
