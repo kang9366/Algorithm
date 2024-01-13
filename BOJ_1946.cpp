@@ -1,38 +1,42 @@
 #include <iostream>
-#include <string>
+#include <vector>
+#include <algorithm>
 
 using namespace std;
 
-char min(char ch){
-    if(ch=='6'){
-        return '5';
-    }else{
-        return ch;
+int solution(vector<pair<int, int>> vec) {
+    int ans = 1;
+
+    sort(vec.begin(), vec.end());
+
+    int minSecond = vec[0].second;
+    for (int i = 1; i < vec.size(); i++) {
+        if (vec[i].second < minSecond) {
+            ans++;
+            minSecond = vec[i].second;
+        }
     }
+
+    return ans;
 }
 
-char max(char ch){
-    if(ch=='5'){
-        return '6';
-    }else{
-        return ch;
-    }
-}
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
 
-int main(){
-    string A, B;
-    string minA = "", minB = "", maxA ="", maxB = "";
-    cin >> A >> B;
-    
-    for(int i=0; i<size(A); i++) {
-        minA += min(A[i]);
-        maxA += max(A[i]);
-    }
+    int T, N, a, b;
+    cin >> T;
 
-    for(int i=0; i<size(B); i++) {
-        minB += min(B[i]);
-        maxB += max(B[i]);
+    for (int i = 0; i < T; i++) {
+        cin >> N;
+        vector<pair<int, int>> vec;
+        for (int j = 0; j < N; j++) {
+            cin >> a >> b;
+            vec.push_back({a, b});
+        }
+        cout << solution(vec) << "\n";
     }
 
-    cout << stoi(minA) + stoi(minB) << " " << stoi(maxA) + stoi(maxB);
+    return 0;
 }
