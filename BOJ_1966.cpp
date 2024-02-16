@@ -1,50 +1,55 @@
-#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <queue>
+#include <string>
+
+#define MAX 101
 
 using namespace std;
 
-int main()
-{
-	int testn;
-	int n, m;
-	int importance;
-	int count;
+int map[MAX][MAX];
+int visited[MAX][MAX];
+int answer[MAX][MAX];
+int dx[4] = { 0, 0, 1, -1 };
+int dy[4] = { 1, -1, 0, 0 };
+int N, M;
 
-	scanf("%d", &testn);
+void bfs(int x, int y) {
+    queue<pair<int, int>> q;
+    q.push({x, y});
+    visited[x][y] = true;
+    answer[x][y] = 1;
 
-	for (int i = 0; i < testn; i++) {
-		count = 0;
-		scanf("%d %d", &n, &m);
-		
-		priority_queue<int> pq; // 내림차순 정렬해야 pop할 때 높은게 빠져나옴.
-		queue<pair<int, int>> q;
+    while(!q.empty()) {
+        pair<int, int> cur = q.front();
+        q.pop();
 
-		for (int j = 0; j < n; j++) {
-			scanf("%d", &importance);
-			q.push({ j, importance });
-			pq.push(importance);
-		}
+        for(int i = 0; i < 4; i++) {
+            int nx = cur.first + dx[i];
+            int ny = cur.second + dy[i];
 
-		while (!q.empty()) {
-			// 위치값과, 우선순위 값을 가져온 뒤 pop수행
-			int location = q.front().first;
-			int value = q.front().second;
-			q.pop();
-            
-			// 값 비교
-			if (pq.top() == value) {
-				pq.pop();
-				++count;
-				if (m == location) {
-					printf("%d\n", count);
-					break;
-				}
-			}
+            if(nx < 1 || ny < 1 || nx > N || ny > M) continue;
+            if(!visited[nx][ny] && map[nx][ny] == 1) {
+                q.push({nx, ny});
+                visited[nx][ny] = true;
+                answer[nx][ny] = answer[cur.first][cur.second] + 1;
+                // cout << nx << " " << ny << " " << answer[nx][ny] << endl;
+                // if(nx == N && ny == M) cout << answer[nx][ny];
+            }
+        }
+    }
+}
 
-			else q.push({ location, value });
-		}
-	}
+int main() {
+    cin >> N >> M;
+    string temp;
 
-	return 0;
+    for(int i = 1; i <= N; i++) {
+        cin >> temp;
+        for(int j = 1; j <= M; j++) {
+            map[i][j] = temp[j-1] - '0';
+        }
+    }
+
+    bfs(1, 1);
+    cout << answer[N][M];
 }
